@@ -6,7 +6,7 @@ agent:
     os_image: ubuntu1804
   containers:
     - name: main
-      image: 'registry.semaphoreci.com/android:31'
+      image: 'registry.semaphoreci.com/android:33'
 global_job_config:
   env_vars:
     - name: ADB_INSTALL_TIMEOUT
