@@ -6,7 +6,7 @@ agent:
     os_image: ubuntu1804
   containers:
     - name: main
-      image: 'registry.semaphoreci.com/android:33'
+      image: 'registry.semaphoreci.com/android:30'
 global_job_config:
   env_vars:
     - name: ADB_INSTALL_TIMEOUT
@@ -23,6 +23,9 @@ blocks:
       jobs:
         - name: Build Project
           commands:
+            - sudo service docker stop
+            - sudo umount -f /var/lib/docker
+            - sudo service docker start
             - ./gradlew bundleDebug
       epilogue:
         on_pass:
