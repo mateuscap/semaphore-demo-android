@@ -23,10 +23,10 @@ blocks:
       jobs:
         - name: Build Project
           commands:
+            - ./gradlew bundleDebug
             - sudo service docker stop
             - sudo umount -f /var/lib/docker
             - sudo service docker start
-            - ./gradlew bundleDebug
       epilogue:
         on_pass:
           commands:
