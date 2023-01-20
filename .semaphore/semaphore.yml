@@ -34,6 +34,8 @@ blocks:
             - cache store gradle-wrapper ~/.gradle/wrapper
             - cache store gradle-cache ~/.gradle/caches
             - cache store android-build ~/.android/build-cache
+    dependencies:
+      - 'Block #3'
   - name: Verification
     task:
       jobs:
@@ -47,6 +49,22 @@ blocks:
         always:
           commands:
             - artifact push job --expire-in 2w --destination reports/ app/build/reports/
+    dependencies:
+      - Build
+  - name: 'Block #3'
+    dependencies: []
+    task:
+      agent:
+        machine:
+          type: e1-standard-2
+          os_image: ubuntu2004
+        containers:
+          - name: main
+            image: 'registry.semaphoreci.com/android:30'
+      jobs:
+        - name: 'Job #1'
+          commands:
+            - echo 'none'
 promotions:
   - name: Start Integration tests
     pipeline_file: integration-tests.yml
